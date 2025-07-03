@@ -51,27 +51,34 @@ onMounted(() => {
 </script>
 
 <template>
-    <nav class="bg-[#346335] text-white justify-between flex items-center p-4 ">
-        <h1 class="text-lg font-semibold">Dock App</h1>
-        <p class="text-lg font-semibold">{{ time }}</p>
-    </nav>
-    <div>
-        <div>
-            <p>Search</p>
+    <main class="flex flex-col w-full">
+        <nav class="bg-[#346335] text-white justify-between flex items-center p-4 w-full">
+            <h1 class="text-lg font-semibold">Dock App</h1>
+            <p class="text-lg font-semibold">{{ time }}</p>
+        </nav>
+        <div class="flex flex-row max-w-full">
+            <div class="flex flex-col max-w-full">
+                <div class="my-3 mx-3 flex justify-between align-middle items-center">
+                    <Search />
+                    <Filters />
+                </div>
+                <div v-if="error" class="error">
+                    Error: {{ error }}
+                </div>
+                <div v-else-if="!data">
+                    Test
+                </div>
+                <div v-else>
+                    <h2 class="text-3xl font-semibold px-4 py-2 text-neutral-950">On dock <span>{{ data.length }}</span>
+                    </h2>
+                    <div v-for="dock in data" :key="dock.id" class="flex flex-wrap gap-4 p-4">
+                        <Dock :name=dock.name color="green" />
+                    </div>
+                </div>
+            </div>
+            <AddTruck />
         </div>
-    </div>
-    <div v-if="error" class="error">
-        Error: {{ error }}
-    </div>
-    <div v-else-if="!data">
-        Test
-    </div>
-    <div v-else>
-        <h2 class="text-2xl font-semibold p-4 text-neutral-950">On dock <span>3</span></h2>
-        <div v-for="dock in data" :key="dock.id" class="flex flex-wrap gap-4 p-4">
-            <Dock :name=dock.name />
-        </div>
-    </div>
+    </main>
 </template>
 
 <style scoped>
