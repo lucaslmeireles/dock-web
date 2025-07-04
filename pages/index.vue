@@ -1,4 +1,7 @@
 <template>
+    <UNavigationMenu>
+        
+    </UNavigationMenu>
     <UCard class="relative max-w-2xs">
         <template #header>
             <h1 class="text-2xl font-bold">Doca 1 - Motores</h1>
